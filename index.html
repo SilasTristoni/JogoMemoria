@@ -39,15 +39,15 @@
         <div class="app-body">
             <aside id="sidebar">
                 <nav>
-                    <a href="#" class="nav-link active" data-view="dashboard-view">Dashboard</a>
-                    <a href="#" class="nav-link" data-view="game-view">Jogar Memo-Flash</a>
+                    <a href="#" class="nav-link" data-view="dashboard-view">Dashboard</a>
+                    <a href="#" class="nav-link active" data-view="game-view">Jogar Memo-Flash</a>
                     <a href="#" class="nav-link" data-view="reports-view">Relatórios</a>
                 </nav>
                 <button id="logout-button">Sair</button>
             </aside>
 
             <main id="content">
-                <section id="dashboard-view" class="view active">
+                <section id="dashboard-view" class="view">
                     <h2 id="dashboard-title">Desempenho</h2>
                     <div class="dashboard-grid">
                         <div class="indicator-card">
@@ -73,7 +73,7 @@
                     </div>
                 </section>
 
-                <section id="game-view" class="view">
+                <section id="game-view" class="view active">
                     <div id="game-info">
                         <span id="score-display">Pontos: 0</span>
                         <span id="level-display">Nível: 1</span>
@@ -112,6 +112,18 @@
         
         <div id="overlay"></div>
         <div id="signature">João e Silas</div>
+    </div>
+
+    <div id="end-game-modal" class="modal-container">
+        <div class="modal-content">
+            <h2>Fim de Jogo!</h2>
+            <p id="modal-score-text"></p>
+            <p>Deseja ver o relatório de partidas?</p>
+            <div class="modal-buttons">
+                <button id="modal-button-yes">Sim, ver relatório</button>
+                <button id="modal-button-no">Não, jogar de novo</button>
+            </div>
+        </div>
     </div>
 
     <script src="script.js"></script>

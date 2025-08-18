@@ -8,10 +8,15 @@ const navLinks = document.querySelectorAll('.nav-link');
 const views = document.querySelectorAll('.view');
 const filterInput = document.getElementById('filter-input');
 const reportsTableBody = document.getElementById('reports-table-body');
-// ELEMENTOS PARA RESPONSIVIDADE
 const menuToggleButton = document.getElementById('menu-toggle-button');
 const sidebar = document.getElementById('sidebar');
 const overlay = document.getElementById('overlay');
+
+// ELEMENTOS DO MODAL
+const endGameModal = document.getElementById('end-game-modal');
+const modalScoreText = document.getElementById('modal-score-text');
+const modalButtonYes = document.getElementById('modal-button-yes');
+const modalButtonNo = document.getElementById('modal-button-no');
 
 // Displays do Dashboard
 const highScoreDisplay = document.getElementById('high-score-display');
@@ -89,6 +94,7 @@ function handleLogout() {
 function showView(viewId) {
     views.forEach(view => view.classList.remove('active'));
     document.getElementById(viewId).classList.add('active');
+    
     navLinks.forEach(link => {
         link.classList.remove('active');
         if (link.dataset.view === viewId) {
@@ -221,7 +227,7 @@ function handleIconClick(event) {
 
 function endGame(message) {
     isPlayerTurn = false;
-    gameStatus.textContent = `Fim de Jogo! ${message} Pontuação final: ${score}`;
+    gameStatus.textContent = `Fim de Jogo! ${message}`;
     const now = new Date();
     gameHistory.push({
         date: now.toLocaleString('pt-BR'),
@@ -230,9 +236,18 @@ function endGame(message) {
         level: level
     });
     saveData();
-    startGameButton.style.display = 'block';
     updateDashboard();
     renderReportsTable();
+    
+    modalScoreText.textContent = `Sua pontuação final foi: ${score}`;
+    endGameModal.classList.add('visible');
+}
+
+// --- FUNÇÕES DO MODAL ---
+function closeModal() {
+    endGameModal.classList.remove('visible');
+    gameStatus.textContent = 'Clique em "Iniciar" para começar!';
+    startGameButton.style.display = 'block';
 }
 
 // --- FUNÇÃO PARA MENU RESPONSIVO ---
@@ -249,7 +264,6 @@ navLinks.forEach(link => {
     link.addEventListener('click', (e) => {
         e.preventDefault();
         showView(link.dataset.view);
-        // Fecha a sidebar se estiver visível (em modo mobile)
         if (sidebar.classList.contains('visible')) {
             toggleSidebar();
         }
@@ -259,6 +273,16 @@ navLinks.forEach(link => {
 filterInput.addEventListener('input', (e) => renderReportsTable(e.target.value));
 startGameButton.addEventListener('click', startGame);
 gameBoard.addEventListener('click', handleIconClick);
+
+// LISTENERS DO MODAL
+modalButtonYes.addEventListener('click', () => {
+    closeModal();
+    showView('reports-view');
+});
+
+modalButtonNo.addEventListener('click', () => {
+    closeModal();
+});
 
 // LISTENERS PARA MENU RESPONSIVO
 menuToggleButton.addEventListener('click', toggleSidebar);
