@@ -29,6 +29,7 @@
 
     <div id="main-app">
         <header>
+            <button id="menu-toggle-button">☰</button>
             <h1>SenacGame</h1>
             <div id="user-info">
                 Bem-vindo(a), <span id="user-display-name"></span>
@@ -47,7 +48,7 @@
 
             <main id="content">
                 <section id="dashboard-view" class="view active">
-                    <h2>Desempenho</h2>
+                    <h2 id="dashboard-title">Desempenho</h2>
                     <div class="dashboard-grid">
                         <div class="indicator-card">
                             <div class="icon">🏆</div>
@@ -90,7 +91,7 @@
                 </section>
 
                 <section id="reports-view" class="view">
-                    <h2>Histórico de Partidas</h2>
+                    <h2 id="reports-title">Histórico de Partidas</h2>
                     <input type="text" id="filter-input" placeholder="Pesquisar por pontuação ou data...">
                     <div class="table-container">
                         <table>
@@ -109,6 +110,7 @@
             </main>
         </div>
         
+        <div id="overlay"></div>
         <div id="signature">João e Silas</div>
     </div>
 

@@ -8,12 +8,15 @@ const navLinks = document.querySelectorAll('.nav-link');
 const views = document.querySelectorAll('.view');
 const filterInput = document.getElementById('filter-input');
 const reportsTableBody = document.getElementById('reports-table-body');
+// ELEMENTOS PARA RESPONSIVIDADE
+const menuToggleButton = document.getElementById('menu-toggle-button');
+const sidebar = document.getElementById('sidebar');
+const overlay = document.getElementById('overlay');
 
 // Displays do Dashboard
 const highScoreDisplay = document.getElementById('high-score-display');
 const maxLevelDisplay = document.getElementById('max-level-display');
 const gamesPlayedDisplay = document.getElementById('games-played-display');
-// NOVA LINHA: Seleciona o display da última pontuação
 const lastScoreDisplay = document.getElementById('last-score-display'); 
 
 // Elementos do Jogo
@@ -96,21 +99,23 @@ function showView(viewId) {
 
 // --- LÓGICA DO DASHBOARD (RF04) ---
 function updateDashboard() {
-    const dashboardTitle = document.querySelector('#dashboard-view h2');
+    const dashboardTitle = document.getElementById('dashboard-title');
     if (dashboardTitle) {
         dashboardTitle.textContent = `Desempenho de ${currentUser.name}`;
+    }
+
+    const reportTitle = document.getElementById('reports-title');
+    if (reportTitle) {
+        reportTitle.textContent = `Histórico de Partidas de ${currentUser.name}`;
     }
 
     const highScore = gameHistory.reduce((max, game) => game.score > max ? game.score : max, 0);
     const maxLevel = gameHistory.reduce((max, game) => game.level > max ? game.level : max, 0);
     const gamesPlayed = gameHistory.length;
-    
-    // ALTERAÇÃO: Lógica para pegar a última pontuação
-    // Se houver jogos, pega a pontuação do último jogo no histórico. Se não, mostra 0.
     const lastScore = gamesPlayed > 0 ? gameHistory[gameHistory.length - 1].score : 0;
 
     highScoreDisplay.textContent = highScore;
-    lastScoreDisplay.textContent = lastScore; // Atualiza o novo card
+    lastScoreDisplay.textContent = lastScore;
     maxLevelDisplay.textContent = maxLevel;
     gamesPlayedDisplay.textContent = gamesPlayed;
 }
@@ -146,7 +151,7 @@ function startGame() {
     level = 1;
     score = 0;
     gameSpeed = 800;
-    sequence = []; // Limpa a sequência anterior
+    sequence = [];
     startGameButton.style.display = 'none';
     updateGameInfo();
     nextLevel();
@@ -226,22 +231,38 @@ function endGame(message) {
     });
     saveData();
     startGameButton.style.display = 'block';
-    updateDashboard(); // Esta linha já garante que o dashboard seja atualizado no fim do jogo
+    updateDashboard();
     renderReportsTable();
+}
+
+// --- FUNÇÃO PARA MENU RESPONSIVO ---
+function toggleSidebar() {
+    sidebar.classList.toggle('visible');
+    overlay.classList.toggle('visible');
 }
 
 // --- EVENT LISTENERS ---
 loginForm.addEventListener('submit', handleLogin);
 logoutButton.addEventListener('click', handleLogout);
+
 navLinks.forEach(link => {
     link.addEventListener('click', (e) => {
         e.preventDefault();
         showView(link.dataset.view);
+        // Fecha a sidebar se estiver visível (em modo mobile)
+        if (sidebar.classList.contains('visible')) {
+            toggleSidebar();
+        }
     });
 });
+
 filterInput.addEventListener('input', (e) => renderReportsTable(e.target.value));
 startGameButton.addEventListener('click', startGame);
 gameBoard.addEventListener('click', handleIconClick);
+
+// LISTENERS PARA MENU RESPONSIVO
+menuToggleButton.addEventListener('click', toggleSidebar);
+overlay.addEventListener('click', toggleSidebar);
 
 // --- INICIALIZAÇÃO ---
 loadData();
