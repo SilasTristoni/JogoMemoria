@@ -7,26 +7,30 @@
     --cor-clara: #fff;
     --sombra: 0 4px 15px rgba(0,0,0,0.1);
 }
-
+ 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
-
+ 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: 'Poppins', sans-serif;
 }
-
+ 
 body {
-    background-color: var(--cor-fundo);
-    color: var(--cor-texto);
+    background-image: url('img/telafundo2.png');    
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+   
+    color: rgb(0, 0, 0);
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
     overflow: hidden;
 }
-
+ 
 /* --- TELA DE LOGIN (RF01) --- */
 #login-screen {
     background: var(--cor-clara);
@@ -37,27 +41,27 @@ body {
     width: 100%;
     max-width: 400px;
 }
-
+ 
 #login-screen.hidden {
     display: none;
 }
-
+ 
 #login-screen h1 {
     color: var(--cor-primaria);
     margin-bottom: 20px;
 }
-
+ 
 .form-group {
     margin-bottom: 20px;
     text-align: left;
 }
-
+ 
 .form-group label {
     display: block;
     margin-bottom: 5px;
     font-weight: 600;
 }
-
+ 
 .form-group input {
     width: 100%;
     padding: 12px;
@@ -65,7 +69,7 @@ body {
     border-radius: 5px;
     font-size: 16px;
 }
-
+ 
 button {
     width: 100%;
     padding: 15px;
@@ -78,11 +82,11 @@ button {
     cursor: pointer;
     transition: background 0.3s;
 }
-
+ 
 button:hover {
     background: #e65c00;
 }
-
+ 
 /* --- APLICAÇÃO PRINCIPAL --- */
 #main-app {
     display: none; /* Inicia oculto */
@@ -90,11 +94,11 @@ button:hover {
     height: 100vh;
     flex-direction: column;
 }
-
+ 
 #main-app.visible {
     display: flex;
 }
-
+ 
 header {
     display: flex;
     justify-content: space-between;
@@ -103,15 +107,17 @@ header {
     background: var(--cor-primaria);
     color: var(--cor-clara);
     box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    gap: 15px;
 }
-
+ 
 header h1 {
     font-size: 24px;
+    flex-shrink: 0;
 }
-
+ 
 /* BOTÃO DE MENU (hambúrguer) */
 #menu-toggle-button {
-    display: none; /* Oculto por padrão */
+    display: none;
     background: none;
     border: none;
     color: var(--cor-clara);
@@ -119,18 +125,24 @@ header h1 {
     cursor: pointer;
     padding: 0 10px;
 }
-
-
+ 
+/* ESTILOS PARA PONTOS E INFO DO USUÁRIO */
+#user-stats {
+    font-size: 16px;
+    font-weight: 600;
+    margin-left: auto; /* Joga os pontos para a direita */
+    white-space: nowrap;
+}
+ 
 #user-info {
     text-align: right;
+    white-space: nowrap;
 }
-
-/* RF02 - Exibição do Nome */
+ 
 #user-display-name {
     font-weight: 600;
 }
-
-/* Assinatura no canto */
+ 
 #signature {
     position: fixed;
     bottom: 10px;
@@ -142,15 +154,13 @@ header h1 {
     border-radius: 3px;
     z-index: 1000;
 }
-
-
+ 
 .app-body {
     display: flex;
     flex-grow: 1;
     overflow: hidden;
 }
-
-/* RF03 - Menu Lateral */
+ 
 #sidebar {
     width: 250px;
     background: var(--cor-clara);
@@ -161,7 +171,7 @@ header h1 {
     flex-shrink: 0;
     transition: transform 0.3s ease-in-out;
 }
-
+ 
 #sidebar nav a {
     display: block;
     padding: 15px 20px;
@@ -171,13 +181,13 @@ header h1 {
     border-left: 4px solid transparent;
     transition: all 0.3s;
 }
-
+ 
 #sidebar nav a:hover, #sidebar nav a.active {
     background: var(--cor-fundo);
     color: var(--cor-primaria);
     border-left-color: var(--cor-secundaria);
 }
-
+ 
 #logout-button {
     margin-top: auto;
     background: none;
@@ -191,30 +201,42 @@ header h1 {
  #logout-button:hover {
     background: #fbeadf;
 }
-
-
-/* --- CONTEÚDO PRINCIPAL --- */
+ 
 main#content {
+    background-image: url('img/telafundo3.png');    
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
     flex-grow: 1;
     padding: 30px;
     overflow-y: auto;
-    background-color: var(--cor-fundo);
 }
-
+ 
 .view {
-    display: none; /* Oculta todas as telas por padrão */
+    display: none;
 }
 .view.active {
-    display: block; /* Mostra apenas a ativa */
+    display: block;
 }
-
-/* RF04 - Dashboard */
+ 
 .dashboard-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 20px;
 }
-
+ 
+#dashboard-title, #reports-title {
+    color: #ffffff;
+    text-align: center;
+    margin-bottom: 20px;
+}
+ 
+#level-display, #score-display {
+    color: #ffffff;
+    font-size: 1.2em;
+    font-weight: 600;
+}
+ 
 .indicator-card {
     background: var(--cor-clara);
     padding: 20px;
@@ -222,36 +244,28 @@ main#content {
     box-shadow: var(--sombra);
     text-align: center;
 }
-
+ 
 .indicator-card .icon {
     font-size: 40px;
     color: var(--cor-secundaria);
 }
-
+ 
 .indicator-card h3 {
     margin: 10px 0 5px;
     color: var(--cor-primaria);
 }
-
+ 
 .indicator-card p {
     font-size: 24px;
     font-weight: 700;
 }
-
-/* RF09 & RF10 - Jogo */
-#game-view h2 {
-    text-align: center;
-    margin-bottom: 20px;
-}
-
+ 
 #game-info {
     display: flex;
     justify-content: space-around;
     margin-bottom: 20px;
-    font-size: 1.2em;
-    font-weight: 600;
 }
-
+ 
 #game-board {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -259,7 +273,7 @@ main#content {
     max-width: 500px;
     margin: auto;
 }
-
+ 
 .game-icon {
     aspect-ratio: 1 / 1;
     background: var(--cor-clara);
@@ -270,7 +284,7 @@ main#content {
     justify-content: center;
     align-items: center;
     transition: transform 0.2s, background-color 0.2s;
-    -webkit-tap-highlight-color: transparent; /* Remove flash azul no clique mobile/totem */
+    -webkit-tap-highlight-color: transparent;
 }
 .game-icon.no-click {
     pointer-events: none;
@@ -282,31 +296,29 @@ main#content {
     width: 60%;
     height: 60%;
     fill: var(--cor-primaria);
-    pointer-events: none; /* Garante que o clique seja no div */
+    pointer-events: none;
 }
 .game-icon.flash {
     background-color: var(--cor-secundaria);
     transform: scale(1.1);
 }
-
+ 
 #game-status {
     text-align: center;
     margin-top: 20px;
     font-size: 1.5em;
     font-weight: bold;
-    color: var(--cor-primaria);
+    color: white;
     min-height: 2.2em;
 }
-
+ 
 #start-game-button {
     display: block;
     margin: 20px auto;
     width: auto;
     padding: 15px 30px;
 }
-
-
-/* RF06 & RF07 - Relatórios */
+ 
 #filter-input {
     width: 100%;
     padding: 12px;
@@ -315,35 +327,34 @@ main#content {
     border-radius: 5px;
     font-size: 16px;
 }
-
+ 
 .table-container {
     overflow-x: auto;
 }
-
+ 
 table {
     width: 100%;
     border-collapse: collapse;
     background: var(--cor-clara);
     box-shadow: var(--sombra);
 }
-
+ 
 th, td {
     padding: 15px;
     text-align: left;
     border-bottom: 1px solid #ddd;
 }
-
+ 
 th {
     background: #e9eff5;
     font-weight: 700;
     color: var(--cor-primaria);
 }
-
+ 
 tbody tr:hover {
     background-color: #f0f5f9;
 }
-
-/* OVERLAY (fundo escuro para o menu mobile) */
+ 
 #overlay {
     position: fixed;
     top: 0;
@@ -352,14 +363,13 @@ tbody tr:hover {
     height: 100%;
     background: rgba(0,0,0,0.5);
     z-index: 1000;
-    display: none; /* Inicia oculto */
+    display: none;
 }
-
+ 
 #overlay.visible {
     display: block;
 }
-
-/* --- ESTILOS DO MODAL / POP-UP DE FIM DE JOGO --- */
+ 
 .modal-container {
     position: fixed;
     top: 0;
@@ -375,12 +385,12 @@ tbody tr:hover {
     pointer-events: none;
     transition: opacity 0.3s ease;
 }
-
+ 
 .modal-container.visible {
     opacity: 1;
     pointer-events: auto;
 }
-
+ 
 .modal-content {
     background: var(--cor-clara);
     padding: 30px;
@@ -392,33 +402,33 @@ tbody tr:hover {
     transform: scale(0.9);
     transition: transform 0.3s ease;
 }
-
+ 
 .modal-container.visible .modal-content {
     transform: scale(1);
 }
-
+ 
 .modal-content h2 {
     color: var(--cor-primaria);
     margin-bottom: 15px;
 }
-
+ 
 .modal-content p {
     margin-bottom: 20px;
     font-size: 1.1em;
 }
-
+ 
 .modal-buttons {
     display: flex;
     gap: 15px;
     justify-content: center;
 }
-
+ 
 .modal-buttons button {
     width: auto;
     padding: 12px 20px;
     font-size: 16px;
 }
-
+ 
 #modal-button-yes {
     background: var(--cor-primaria);
 }
@@ -431,10 +441,52 @@ tbody tr:hover {
 #modal-button-no:hover {
     background: #e65c00;
 }
-
+ 
+.prizes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+}
+ 
+.prize-card {
+    background: var(--cor-clara);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: var(--sombra);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+ 
+.prize-card .icon {
+    font-size: 40px;
+    color: var(--cor-secundaria);
+    margin-bottom: 10px;
+}
+ 
+.prize-card h3 {
+    margin: 10px 0 5px;
+    color: var(--cor-primaria);
+}
+ 
+.prize-card p {
+    margin-bottom: 15px;
+}
+ 
+.prize-card button {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+}
+ 
+.prize-card button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+ 
 /* --- RESPONSIVIDADE --- */
-
-/* Telas de tablet */
 @media (max-width: 992px) {
     #sidebar {
         width: 220px;
@@ -446,8 +498,7 @@ tbody tr:hover {
         font-size: 22px;
     }
 }
-
-/* Telas de celular e totens em modo retrato */
+ 
 @media (max-width: 768px) {
     body {
         overflow: auto;
@@ -458,8 +509,8 @@ tbody tr:hover {
         padding: 15px;
     }
     #menu-toggle-button {
-        display: block; /* Mostra o botão do menu */
-        order: -1; /* Move o botão para o início do header (flexbox) */
+        display: block;
+        order: -1;
     }
     #sidebar {
         position: fixed;
@@ -476,7 +527,7 @@ tbody tr:hover {
         padding: 15px;
     }
     .dashboard-grid {
-        grid-template-columns: 1fr; /* Coluna única para os cards */
+        grid-template-columns: 1fr;
     }
     #game-board {
         gap: 10px;
@@ -487,7 +538,10 @@ tbody tr:hover {
         width: 90%;
         box-shadow: none;
     }
+    #user-stats {
+        font-size: 14px; /* Ajusta fonte dos pontos */
+    }
     #user-info {
-        display: none; /* Opcional: Oculta o "bem-vindo" para ganhar espaço */
+        display: none; /* Oculta o "bem-vindo" */
     }
 }

@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
+ 
     <section id="login-screen">
         <h1>SenacGame</h1>
         <form id="login-form">
@@ -26,26 +26,30 @@
             <button type="submit">Entrar</button>
         </form>
     </section>
-
+ 
     <div id="main-app">
         <header>
             <button id="menu-toggle-button">☰</button>
             <h1>SenacGame</h1>
+            <div id="user-stats">
+                Pontos: <span id="user-points-display">0</span>
+            </div>
             <div id="user-info">
                 Bem-vindo(a), <span id="user-display-name"></span>
             </div>
         </header>
-
+ 
         <div class="app-body">
             <aside id="sidebar">
                 <nav>
                     <a href="#" class="nav-link" data-view="dashboard-view">Dashboard</a>
                     <a href="#" class="nav-link active" data-view="game-view">Jogar Memo-Flash</a>
                     <a href="#" class="nav-link" data-view="reports-view">Relatórios</a>
+                    <a href="#" class="nav-link" data-view="prizes-view">Resgatar Prêmios</a>
                 </nav>
                 <button id="logout-button">Sair</button>
             </aside>
-
+ 
             <main id="content">
                 <section id="dashboard-view" class="view">
                     <h2 id="dashboard-title">Desempenho</h2>
@@ -72,7 +76,7 @@
                         </div>
                     </div>
                 </section>
-
+ 
                 <section id="game-view" class="view active">
                     <div id="game-info">
                         <span id="score-display">Pontos: 0</span>
@@ -89,7 +93,7 @@
                     </div>
                     <button id="start-game-button">Iniciar Jogo</button>
                 </section>
-
+ 
                 <section id="reports-view" class="view">
                     <h2 id="reports-title">Histórico de Partidas</h2>
                     <input type="text" id="filter-input" placeholder="Pesquisar por pontuação ou data...">
@@ -103,17 +107,52 @@
                                 </tr>
                             </thead>
                             <tbody id="reports-table-body">
-                                </tbody>
+                            </tbody>
                         </table>
+                    </div>
+                </section>
+ 
+                <section id="prizes-view" class="view">
+                    <h2 style="color: #ffffff;">Loja de Prêmios</h2>
+                    <p style="text-align: center; margin-bottom: 20px; color: #ffffff; font-weight: 600; font-size: 18px;">Use seus pontos para resgatar os prêmios!</p>
+                    <div class="prizes-grid">
+                        <div class="prize-card">
+                            <div class="icon">📏</div>
+                            <h3>Régua</h3>
+                            <p>Custo: <strong>500</strong> pontos</p>
+                            <p>Restantes: <strong id="ruler-stock">500</strong></p>
+                            <button class="claim-btn" id="claim-ruler">Resgatar</button>
+                        </div>
+                        <div class="prize-card">
+                            <div class="icon">📱</div>
+                            <h3>Porta Celular</h3>
+                            <p>Custo: <strong>1500</strong> pontos</p>
+                            <p>Restantes: <strong id="phone-holder-stock">290</strong></p>
+                            <button class="claim-btn" id="claim-phone-holder">Resgatar</button>
+                        </div>
+                        <div class="prize-card">
+                            <div class="icon">🥤</div>
+                            <h3>Copo Personalizado</h3>
+                            <p>Custo: <strong>4000</strong> pontos</p>
+                            <p>Restantes: <strong id="cup-stock">40</strong></p>
+                            <button class="claim-btn" id="claim-cup">Resgatar</button>
+                        </div>
+                        <div class="prize-card">
+                            <div class="icon">🥎</div>
+                            <h3>Bolinha Anti-Stress</h3>
+                            <p>Custo: <strong>4000</strong> pontos</p>
+                            <p>Restantes: <strong id="ball-stock">40</strong></p>
+                            <button class="claim-btn" id="claim-ball">Resgatar</button>
+                        </div>
                     </div>
                 </section>
             </main>
         </div>
-        
+ 
         <div id="overlay"></div>
         <div id="signature">João e Silas</div>
     </div>
-
+ 
     <div id="end-game-modal" class="modal-container">
         <div class="modal-content">
             <h2>Fim de Jogo!</h2>
@@ -125,7 +164,7 @@
             </div>
         </div>
     </div>
-
+ 
     <script src="script.js"></script>
 </body>
 </html>
